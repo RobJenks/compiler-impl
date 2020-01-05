@@ -1,0 +1,1 @@
+pub const LEXER_INPUT_ERROR_STREAM_CONTEXT_MAX_SIZE : usize = 16;
