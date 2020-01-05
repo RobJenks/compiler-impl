@@ -17,3 +17,7 @@ pub fn read_asterisk(stream: InputStream) -> Option<ValidToken> {
 pub fn read_fslash(stream: InputStream) -> Option<ValidToken> {
     single_char_token(stream, '/', Token::FSlash)
 }
+
+pub fn read_equals(stream: InputStream) -> Option<ValidToken> {
+    single_char_token(stream, '=', Token::Equals)
+}

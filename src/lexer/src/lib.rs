@@ -1,6 +1,3 @@
-#![feature(slice_patterns)]
-#![feature(bindings_after_at)]
-
 mod input;
 mod tokens;
 mod rules;
@@ -27,16 +24,14 @@ impl Lexer {
         let mut stream: InputStream = InputStream::for_data(data);
 
         while let Some(_) = stream.peek() {
-            let token = rules::match_token(stream.clone());
-            match token.as_slice() {
-                [] => Lexer::throw_unrecognised_identifier(stream.clone()),
-                ts @ [_, _, ..] => Lexer::throw_multiple_tokens(ts, stream.clone()),
-                [res] => {
-                    if self.should_emit_token(res.get_token()) {
-                        tokenized.add(res.get_token());
-                    }
-                    stream = res.get_next();
+            if let Some(res) = rules::match_token(stream.clone()) {
+                if self.should_emit_token(res.get_token()) {
+                    tokenized.add(res.get_token());
                 }
+                stream = res.get_next();
+            }
+            else {
+                Lexer::throw_unrecognised_identifier(stream.clone());
             }
         }
 
@@ -53,11 +48,11 @@ impl Lexer {
         Lexer::throw_error_with_stream_context("Unrecognised identifier", stream)
     }
 
-    fn throw_multiple_tokens(candidates: &[ValidToken], stream: InputStream) {
+    fn _throw_multiple_tokens(candidates: &[ValidToken], stream: InputStream) {
         Lexer::throw_error_with_stream_context(format!("Multiple tokens ({}) matching input",
                                                        candidates.iter()
                                                            .map(ValidToken::get_token)
-                                                           .join(",")
+                                                           .join(",     ")
         ).as_str(), stream)
     }
 

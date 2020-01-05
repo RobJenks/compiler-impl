@@ -24,7 +24,7 @@ impl <'a> ValidToken<'a> {
         Self { token, next }
     }
 
-    pub fn get_token(&self) -> Token { self.token }
+    pub fn get_token(&self) -> Token { self.token.clone() }
     pub fn get_next(&self) -> InputStream<'a> { self.next.clone() }
 
 }

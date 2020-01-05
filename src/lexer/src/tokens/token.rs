@@ -1,4 +1,4 @@
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Token {
     SOF,
     EOF,
@@ -7,7 +7,10 @@ pub enum Token {
     Plus,
     Minus,
     Asterisk,
-    FSlash
+    FSlash,
+    Equals,
+    Let,
+    Identifier (String)
 }
 
 impl std::fmt::Display for Token {

@@ -24,7 +24,7 @@ impl Tokenized {
         self.data = self.data
             .iter()
             .filter(|&t| pred(t))
-            .map(|t| *t)
+            .map(|t| t.clone())
             .collect();
     }
 }
