@@ -7,13 +7,22 @@ mod rules;
 mod config;
 
 use crate::tokens::Tokenized;
+use crate::tokens::token::Token;
 use crate::input::{InputStream, StreamingInput, ValidToken};
 use itertools::Itertools;
 
-pub struct Lexer {}
+pub struct Lexer {
+    strip_whitespace: bool
+}
 
 impl Lexer {
-    pub fn tokenize(data: &str) -> Tokenized {
+    pub fn new(strip_whitespace: bool) -> Self {
+        Self { strip_whitespace }
+    }
+}
+
+impl Lexer {
+    pub fn tokenize(&self, data: &str) -> Tokenized {
         let mut tokenized = Tokenized::new();
         let mut stream: InputStream = InputStream::for_data(data);
 
@@ -23,13 +32,21 @@ impl Lexer {
                 [] => Lexer::throw_unrecognised_identifier(stream.clone()),
                 ts @ [_, _, ..] => Lexer::throw_multiple_tokens(ts, stream.clone()),
                 [res] => {
-                    tokenized.add(res.get_token());
+                    if self.should_emit_token(res.get_token()) {
+                        tokenized.add(res.get_token());
+                    }
                     stream = res.get_next();
                 }
             }
         }
 
         tokenized
+    }
+
+    fn should_emit_token(&self, token: Token) -> bool {
+        if self.strip_whitespace && token == Token::Whitespace { false }
+
+        else { true }
     }
 
     fn throw_unrecognised_identifier(stream: InputStream) {

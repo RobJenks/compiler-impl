@@ -19,6 +19,14 @@ impl Tokenized {
     pub fn data(&self) -> &Vec<Token> {
         &self.data
     }
+
+    pub fn filter(&mut self, pred: fn(&Token) -> bool) {
+        self.data = self.data
+            .iter()
+            .filter(|&t| pred(t))
+            .map(|t| *t)
+            .collect();
+    }
 }
 
 
