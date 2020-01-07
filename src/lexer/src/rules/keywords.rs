@@ -1,5 +1,5 @@
 use crate::input::{InputStream, ValidToken};
-use crate::tokens::token::Token;
+use common::tokens::token::Token;
 use crate::rules::general::single_string_token;
 
 pub fn read_keyword_let(stream: InputStream) -> Option<ValidToken> {

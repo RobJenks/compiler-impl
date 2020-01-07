@@ -1,5 +1,5 @@
 use crate::input::{InputStream, ValidToken};
-use crate::tokens::token::Token;
+use common::tokens::token::Token;
 use itertools::Itertools;
 
 

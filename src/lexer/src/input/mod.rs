@@ -1,6 +1,6 @@
 use core::iter::*;
 use core::str::Chars;
-use crate::tokens::token::Token;
+use common::tokens::token::Token;
 
 pub type InputStream<'a> = Peekable<Chars<'a>>;
 

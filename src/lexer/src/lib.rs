@@ -1,10 +1,9 @@
 mod input;
-mod tokens;
 mod rules;
 mod config;
 
-use crate::tokens::Tokenized;
-use crate::tokens::token::Token;
+use common::tokens::Tokenized;
+use common::tokens::token::Token;
 use crate::input::{InputStream, StreamingInput, ValidToken};
 use itertools::Itertools;
 
@@ -16,9 +15,7 @@ impl Lexer {
     pub fn new(strip_whitespace: bool) -> Self {
         Self { strip_whitespace }
     }
-}
 
-impl Lexer {
     pub fn tokenize(&self, data: &str) -> Tokenized {
         let mut tokenized = Tokenized::new();
         let mut stream: InputStream = InputStream::for_data(data);
