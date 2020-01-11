@@ -1,7 +1,10 @@
-pub mod token;
-
+use std::slice::Iter;
+use core::iter::Peekable;
 use crate::tokens::token::Token;
 
+pub mod token;
+
+pub type TokenIter<'a> = Peekable<Iter<'a, token::Token>>;
 
 pub struct Tokenized {
     data : Vec<Token>

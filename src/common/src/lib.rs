@@ -1,6 +1,6 @@
 pub mod tokens;
 pub mod nodes;
-
+pub mod util;
 
 #[cfg(test)]
 mod tests {

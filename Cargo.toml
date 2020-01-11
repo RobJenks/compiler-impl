@@ -6,6 +6,7 @@ edition = "2018"
 
 
 [dependencies]
+common = { path = "src/common" }
 lexer = { path = "src/lexer" }
 parser = { path = "src/parser" }
 

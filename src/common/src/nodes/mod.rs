@@ -1,25 +1,45 @@
+pub mod parsing;
+
 pub type NodeId = usize;
 
+#[derive(Clone, Debug, PartialEq)]
+pub enum AstNode {
+    Literal(AstLiteral),
+    Identifier(AstIdentifier),
+    UnaryOperator(AstUnaryOperator),
+    BinaryOperator(AstBinaryOperator),
+    Expression(AstExpression),
+    Statement(AstStatement)
+}
+
+#[derive(Clone, Debug, PartialEq)]
 pub enum AstLiteral {
-    Integral
+    Integral(i64),
+    String(String)
 }
 
+#[derive(Clone, Debug, PartialEq)]
 pub enum AstIdentifier {
-    Variable
+    Let,
+    Variable(String)
 }
 
+#[derive(Clone, Debug, PartialEq)]
 pub enum AstUnaryOperator {
     Plus,
     Minus
 }
 
+#[derive(Clone, Debug, PartialEq)]
 pub enum AstBinaryOperator {
     Add,
     Minus,
     Multiply,
-    Divide
+    Divide,
+    Equals
 }
 
+#[derive(Clone, Debug, PartialEq)]
 pub enum AstExpression {
     Literal(AstLiteral),
     Identifier(AstIdentifier),
@@ -27,11 +47,7 @@ pub enum AstExpression {
     Binary(Box<AstExpression>, AstBinaryOperator, Box<AstExpression>),
 }
 
+#[derive(Clone, Debug, PartialEq)]
 pub enum AstStatement {
-    Assignment(AstIdentifier, Box<AstExpression>)
-}
-
-pub enum AstNode {
-    AstExpression,
-    AstStatement
+    Assignment(AstIdentifier, AstExpression)
 }

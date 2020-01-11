@@ -8,6 +8,7 @@ version = "0.1.0"
 name = "compiler-impl"
 version = "0.1.0"
 dependencies = [
+ "common 0.1.0",
  "itertools 0.8.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "lexer 0.1.0",
  "parser 0.1.0",
