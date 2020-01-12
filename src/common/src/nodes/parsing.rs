@@ -11,18 +11,15 @@ impl <'a,T> NodeParseResult<'a,T>
     where T: Clone,T: std::fmt::Debug {
 
     pub fn of(res: T, next: TokenIter<'a>) -> Self {
-        println!("of: {:?}", res);
         Self { result: Some(res), next: Some(next) }
     }
 
     pub fn of_opt(res: T, next: Option<TokenIter<'a>>) -> Self {
-        println!("of_opt: {:?}", res);
         Self { result: Some(res), next }
     }
 
     pub fn and<'b,U>(&self, f: fn(TokenIter<'a>) -> NodeParseResult<'b,U>) -> NodeParseResult<'b,(T,U)>
         where U: Clone {
-        println!("{:?}", &self.next);
         match &self.result {
             None => NodeParseResult { result: None, next: None },
             _ => match &self.next {

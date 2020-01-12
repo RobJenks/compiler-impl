@@ -1,0 +1,22 @@
+unary_op  := '+' | '-'
+binary_op := '+' | '-' | '*' | '/' | '='
+
+literal    := i64
+identifier := let | <var>
+let        := "let",identifier,binary_op,expr
+
+statement := let
+
+// # Left-recursion elimination
+// expr := expr,binary_op,expr
+//       | unary_op,expr
+//       | identifier
+//       | literal
+
+expr  := unary_op,expr,expr'
+       | identifier,expr'
+       | literal,expr'
+
+expr' := binary_op,expr,expr'
+       | EPS
+

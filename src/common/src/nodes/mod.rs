@@ -41,10 +41,15 @@ pub enum AstBinaryOperator {
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum AstExpression {
-    Literal(AstLiteral),
-    Identifier(AstIdentifier),
-    Unary(AstUnaryOperator, Box<AstExpression>),
-    Binary(Box<AstExpression>, AstBinaryOperator, Box<AstExpression>),
+    Literal(AstLiteral, Box<AstExpressionPrime>),
+    Identifier(AstIdentifier, Box<AstExpressionPrime>),
+    Unary(AstUnaryOperator, Box<AstExpression>, Box<AstExpressionPrime>)
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub enum AstExpressionPrime {
+    Binary(AstBinaryOperator, Box<AstExpression>, Box<AstExpressionPrime>),
+    EPS
 }
 
 #[derive(Clone, Debug, PartialEq)]

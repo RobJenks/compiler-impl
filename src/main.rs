@@ -4,6 +4,8 @@ use lexer::Lexer;
 use parser::Parser;
 
 fn main() {
+    env_logger::init();
+
     let lexer = Lexer::new(true);
     let tokens = lexer.tokenize("let myVar = 2 * 3 +    6");
 

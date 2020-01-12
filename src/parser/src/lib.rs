@@ -1,6 +1,5 @@
-use common::tokens::token::Token;
-use common::nodes::{AstNode, AstExpression, AstLiteral};
 use common::tokens::Tokenized;
+use common::nodes::*;
 
 mod production;
 
@@ -11,8 +10,12 @@ impl Parser {
     pub fn new() -> Self { Self {} }
 
     pub fn parse(&self, tokens: Tokenized) -> AstNode {
-        //AstNode::Expression(AstExpression::Literal(AstLiteral::Integral(12)))
-        AstNode::Statement(production::parse_statement(tokens.data().iter().peekable()).result().clone().unwrap())
+        AstNode::Statement(production::parse_statement(tokens.data()
+            .iter()
+            .peekable())
+            .result()
+            .clone()
+            .unwrap())
     }
 
 }
