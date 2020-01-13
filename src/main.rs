@@ -1,7 +1,9 @@
 use itertools::Itertools;
+use common::nodes::*;
 use lexer;
 use lexer::Lexer;
 use parser::Parser;
+use common::nodes::render::RenderableNode;
 
 fn main() {
     env_logger::init();
@@ -16,7 +18,9 @@ fn main() {
         .join(","));
 
     let parser = Parser::new();
-    let ast = parser.parse(tokens);
+    let ast: AstNode = parser.parse(tokens);
 
     println!("{:?}", ast);
+
+    println!("{}", ast.render(0));
 }

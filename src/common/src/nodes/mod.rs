@@ -1,4 +1,5 @@
 pub mod parsing;
+pub mod render;
 
 pub type NodeId = usize;
 
